@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSC2031</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+<style>
+    .table {
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+<section class="container-fluid p-3 my-3">
+
+    <nav class="nav nav-pills flex-column flex-sm-row">
+        <a class="nav-item nav-link" href="{{ url_for('index') }}">Home</a>
+        <a class="nav-item nav-link" href="{{ url_for('accounts.registration') }}">Registration</a>
+        <a class="nav-item nav-link" href="{{ url_for('accounts.login') }}">Login</a>
+        <a class="nav-item nav-link" href="{{ url_for('accounts.account') }}">Account</a>
+        <a class="nav-item nav-link" href="{{ url_for('posts.posts') }}">View Posts</a>
+        <a class="nav-item nav-link" href="{{ url_for('posts.create') }}">Create Post</a>
+        <a class="nav-item nav-link" href="{{ url_for('security.security') }}">Security</a>
+        <a class="nav-item nav-link" href="https://127.0.0.1:5000/admin">DB Admin</a>
+        <a class="nav-item nav-link" href="{{ url_for('accounts.logout') }}">Logout</a>
+    </nav>
+
+    <div class="container-fluid p-3 my-5 text-center">
+  {% block content %}
+  {% endblock %}
+    </div>
+</section>
+
+</body>
+</html>

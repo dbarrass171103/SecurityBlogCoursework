@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Account Details</h1>
+
+    {% if current_user.is_authenticated %}
+    <div class="p-2 row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="p-2 bg-light border border-primary" style="text-align: left">
+                <div>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% for category, message in messages %}
+                             <div style="text-align: left" class="alert alert-{{ category }} mt-3 alert-dismissible" role="alert">
+                                 {{ message }}
+                                 <button type="button" class="btn-close" data-bs-dismiss="alert" onclick=delete_flash(this)>
+                                     <span>&times;</span>
+                                 </button>
+                             </div>
+                        {% endfor %}
+                    {% endwith %}
+                </div>
+
+                <h3>Account Information</h3>
+                <ul>
+                    <li><strong>User ID:</strong> {{ current_user.id }}</li>
+                    <li><strong>First Name:</strong> {{ current_user.firstname }}</li>
+                    <li><strong>Last Name:</strong> {{ current_user.lastname }}</li>
+                    <li><strong>Phone Number:</strong> {{ current_user.phone }}</li>
+                </ul>
+
+                <h4>Posts Created</h4>
+                {% if current_user.posts %}
+                    <ul>
+                        {% for post in current_user.posts %}
+                            <li>
+                                <strong>{{ post.title }}</strong> -
+                                <small>{{ post.created.strftime('%d-%m-%Y %H:%M:%S') }}</small>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No posts created yet.</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+    {% else %}
+        <div class="alert alert-warning">
+            You need to log in to see your account details.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

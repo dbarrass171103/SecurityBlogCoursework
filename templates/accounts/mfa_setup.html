@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Multi-Factor Authentication (MFA) Setup</h1>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% for category, message in messages %}
+<div class="alert alert-{{ category }} mt-3 alert-dismissible" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"
+            onclick=delete_flash(this)>
+        <span>&times;</span>
+    </button>
+</div>
+{% endfor %}
+{% endwith %}
+
+<p>Please scan the following QR code with your MFA app to set up MFA for your account.</p>
+
+<img src="{{ qrcode(uri, box_size=5, border=5) }}">
+
+<ol> Or to enter the code manually:
+    <li>Open an authenticator app on your mobile device</li>
+    <li>Select add new account</li>
+    <li>Enter the code below</li>
+</ol>
+    <p>MFA Code: {{ mfa_key }}</p>
+
+
+<p>Click here to go to <a href="{{ url_for('accounts.login') }}">login page</a>.</p>
+
+{% endblock %}
